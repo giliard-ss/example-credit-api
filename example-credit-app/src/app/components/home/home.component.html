@@ -1,0 +1,92 @@
+
+<mat-toolbar>
+    <span>Consultar Crédito</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+
+
+<mat-card appearance="outlined">
+    <mat-card-content>
+        <form class="search-form" [formGroup]="form" (ngSubmit)="search()">
+            <mat-form-field class="search-full-width">
+              <mat-label>Número NFSE</mat-label>
+              <input matInput formControlName="numeroNfse">
+            </mat-form-field>
+    
+    
+            <mat-form-field class="search-full-width">
+                <mat-label>Número Crédito</mat-label>
+                <input matInput formControlName="numeroCredito">
+              </mat-form-field>
+          
+           <button mat-flat-button  type="submit" [disabled]="disableButtons">Pesquisar</button>
+           &nbsp;<button mat-flat-button [disabled]="disableButtons" (click)="clear()">Limpar</button>
+          </form>
+    </mat-card-content>
+  </mat-card>
+
+  @if(loading){
+    <mat-spinner [diameter]="40"></mat-spinner>
+  }
+
+
+
+@if(dataSource.length) {
+    <table mat-table [dataSource]="dataSource" class="result-table">
+
+        <ng-container matColumnDef="numeroCredito">
+            <th mat-header-cell *matHeaderCellDef> N° Credito </th>
+            <td mat-cell *matCellDef="let credit"> {{credit.numeroCredito}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="numeroNfse">
+            <th mat-header-cell *matHeaderCellDef> N° NFSE </th>
+            <td mat-cell *matCellDef="let credit"> {{credit.numeroNfse}} </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="dataConstituicao">
+            <th mat-header-cell *matHeaderCellDef> Data Constituição </th>
+            <td mat-cell *matCellDef="let credit"> {{credit.dataConstituicao | date:'dd/MM/yyyy'}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="valorIssqn">
+            <th mat-header-cell *matHeaderCellDef> ISSQN </th>
+            <td mat-cell *matCellDef="let credit"> {{credit.valorIssqn | brCurrency}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="tipoCredito">
+            <th mat-header-cell *matHeaderCellDef> Tipo Crédito </th>
+            <td mat-cell *matCellDef="let credit"> {{credit.tipoCredito}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="simplesNacional">
+            <th mat-header-cell *matHeaderCellDef> Simples Nacional </th>
+            <td mat-cell *matCellDef="let credit"> {{credit.simplesNacional}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="aliquota">
+            <th mat-header-cell *matHeaderCellDef> Aliquota </th>
+            <td mat-cell *matCellDef="let credit"> {{credit.aliquota+'%'}} </td>
+          </ng-container>
+ 
+          <ng-container matColumnDef="valorFaturado">
+            <th mat-header-cell *matHeaderCellDef> Valor Faturado </th>
+            <td mat-cell *matCellDef="let credit"> {{credit.valorFaturado | brCurrency}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="valorDeducao">
+            <th mat-header-cell *matHeaderCellDef>Valor Dedução </th>
+            <td mat-cell *matCellDef="let credit"> {{credit.valorDeducao | brCurrency}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="baseCalculo">
+            <th mat-header-cell *matHeaderCellDef>Base Cálculo </th>
+            <td mat-cell *matCellDef="let credit"> {{credit.baseCalculo | brCurrency}} </td>
+          </ng-container>
+    
+       
+          <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+    </table>
+}
