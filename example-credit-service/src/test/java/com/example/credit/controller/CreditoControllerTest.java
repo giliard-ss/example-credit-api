@@ -49,7 +49,7 @@ class CreditoControllerTest {
     }
 
     @Test
-    void shouldGetByNumeroNfseListByNumeroNfse() throws Exception {
+    void shouldReturnDtoListByNumeroNfse() throws Exception {
         String numeroNfse = "7891011";
 
         mockMvc.perform(get("/api/creditos/" + numeroNfse))
@@ -60,7 +60,7 @@ class CreditoControllerTest {
     }
 
     @Test
-    void shouldGetByNumeroNfseByNumeroCredito() throws Exception {
+    void shouldReturnDtoByNumeroCredito() throws Exception {
         String numeroCredito = "123456";
 
         mockMvc.perform(get("/api/creditos/credito/" + numeroCredito))
@@ -69,7 +69,7 @@ class CreditoControllerTest {
     }
 
     @Test
-    void shouldReturn404WhenGetByNumeroNfseByNumeroCredito() throws Exception {
+    void shouldReturn404WhenDoesNotExists() throws Exception {
         String numeroCredito = "010101";
         mockMvc.perform(get("/api/creditos/credito/" + numeroCredito))
                 .andExpect(status().isNotFound());
