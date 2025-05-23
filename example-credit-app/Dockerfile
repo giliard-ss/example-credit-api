@@ -11,4 +11,4 @@ FROM nginx:1.28.0-alpine
 COPY --from=builder /app/dist/example-credit-app/browser /usr/share/nginx/html
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/mime.types /usr/nginx/mime.types
-EXPOSE 8080
+EXPOSE 80

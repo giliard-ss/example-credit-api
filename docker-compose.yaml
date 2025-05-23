@@ -21,7 +21,7 @@ services:
       SPRING_DATASOURCE_PASSWORD: 123456
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
     ports:
-      - 8080:8080
+      - 8089:8080
     depends_on:
       - db
 
@@ -29,7 +29,7 @@ services:
   frontend:
     build: ./example-credit-app
     ports:
-      - 4200:4200
+      - "8080:80"
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.6.5
