@@ -20,6 +20,7 @@ services:
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 123456
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:8181}
     ports:
       - 8089:8080
     depends_on:
@@ -28,6 +29,8 @@ services:
 
   frontend:
     build: ./example-credit-app
+    environment:
+      API_URL: http://localhost:8089/api
     ports:
       - "8080:80"
 
